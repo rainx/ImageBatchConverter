@@ -69,7 +69,7 @@
         position: absolute;
       }
 
-      .select-path button {
+      .select-path button{
         height: 30px;
         width: 100px;
         position: absolute;
@@ -84,6 +84,10 @@
         top:0px;
         left: 0px;
         visibility: hidden;
+      }
+
+      #dstPathButton {
+        display: none;
       }
     </style>
   </head>
@@ -104,6 +108,10 @@
       <section class="dst-section">
         <span>Destination Path : </span>
         <input type="text" id="dstPath" class="dst-path" readonly>
+        <div class="select-path">
+          <button id="dstPathButton">Setting Directory</button>
+          <input type="file" id="dstPathRealButton" webkitdirectory >
+        </div>
       </section>
       <section class="eq-section">
         <span>Destination Path Equals<br>
@@ -113,7 +121,6 @@
       <section class="output-section">
         <span>Output File Type : </span>
         <input type="radio" value="1" id="outputFileType" checked> BMP
-        <input type="radio" value="2" id="outputFileType"> PNG
       </section>
       <section>
         <button class="convert-all convert-button" id="convertAll">Convert ALL!</button>

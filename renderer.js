@@ -9,6 +9,8 @@ const mainProcess = remote.require('./main')
 const ipcRenderer = require('electron').ipcRenderer;
 let watching = false
 
+const $ = require("jquery")
+
 
 document.getElementById('sourcePathButton').addEventListener('click', _ => {
     document.getElementById('sourcePathRealButton').click()
@@ -19,13 +21,38 @@ document.getElementById("sourcePathRealButton").addEventListener("change", (e) =
     document.getElementById("sourcePath").value = fileName
 })
 
+document.getElementById('dstPathButton').addEventListener('click', _ => {
+    document.getElementById('dstPathRealButton').click()
+})
+
+document.getElementById("dstPathRealButton").addEventListener("change", (e) => {
+    const fileName = e.target.files[0].path
+    document.getElementById("dstPath").value = fileName
+})
+
 function getSourcePath() {
     return document.getElementById("sourcePath").value.trim()
 }
 
+$("#isEqualToSrc").change((e) => {
+    const isCheck = $(e.target).is(':checked')
+    if (isCheck) {
+        $("#dstPath").val("")
+        $("#dstPath").attr("readonly", true)
+        $("#dstPathButton").hide()
+    } else {
+        $("#dstPath").attr("readonly", false)
+        $("#dstPathButton").show()
+    }
+})
+
 function getTargetPath() {
-    console.log(document.getElementById("isEqualToSrc").getAttribute("checked"))
-    return document.getElementById("sourcePath").value.trim()
+    const isCheck = $("#isEqualToSrc").is(':checked')
+    if (isCheck) {
+        return document.getElementById("sourcePath").value.trim()
+    } else {
+        return $("#dstPath").val().trim()
+    }
 }
 
 function getTargetExt() {
@@ -44,9 +71,15 @@ function getFilter() {
 }
 
 document.getElementById("convertAll").addEventListener("click", () => {
+    const isCheck = $("#isEqualToSrc").is(':checked')
 
     if (getSourcePath() == '') {
         alert('来源目录不能为空')
+        return
+    }
+
+    if (!isCheck && getTargetPath() == '') {
+        alert('目标目录不能为空')
         return
     }
 
@@ -62,8 +95,15 @@ document.getElementById("convertAll").addEventListener("click", () => {
 
 document.getElementById("watchAndConvert").addEventListener("click", (e) => {
     if (!watching) {
+        const isCheck = $("#isEqualToSrc").is(':checked')
+
         if (getSourcePath() == '') {
             alert('来源目录不能为空')
+            return
+        }
+
+        if (!isCheck && getTargetPath() == '') {
+            alert('目标目录不能为空')
             return
         }
 
