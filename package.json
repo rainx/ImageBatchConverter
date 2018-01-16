@@ -5,9 +5,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "rm -r ImageBatchConverter-darwin-x64 && electron-packager .",
+    "prepackage": "npm run clean",
+    "package": "electron-packager .",
     "dmg": "electron-installer-dmg ImageBatchConverter-darwin-x64/ImageBatchConverter.app ImageBatchConverter --overwrite",
-    "main": "electron --inspect=5858 . "
+    "main": "electron --inspect=5858 . ",
+    "clean": "rm -rf ImageBatchConverter-darwin-x64 && rm -rf ${npm_pacakge_name}.dmg"
   },
   "repository": "",
   "keywords": [
