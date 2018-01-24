@@ -7,6 +7,7 @@
     "start": "electron .",
     "prepackage": "npm run clean",
     "package": "electron-packager .",
+    "package-win32": "electron-packager . --platform=win32 --arch=ia32 ",
     "dmg": "electron-installer-dmg ImageBatchConverter-darwin-x64/ImageBatchConverter.app ImageBatchConverter --overwrite",
     "main": "electron --inspect=5858 . ",
     "clean": "rm -rf ImageBatchConverter-darwin-x64 && rm -rf ${npm_pacakge_name}.dmg"
@@ -22,9 +23,10 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.7.8",
+    "electron": "~1.7.11",
     "electron-installer-dmg": "^0.2.1",
-    "electron-packager": "^10.1.1"
+    "electron-packager": "^10.1.1",
+    "rcedit": "^0.9.0"
   },
   "dependencies": {
     "jimp": "^0.2.28",

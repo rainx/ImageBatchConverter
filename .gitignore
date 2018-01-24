@@ -1,3 +1,4 @@
 node_modules
 ImageBatchConverter-darwin-x64
+ImageBatchConverter-win32-ia32
 *.dmg
